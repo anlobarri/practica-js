@@ -1,0 +1,49 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const allPosts = await Astro.glob("./*.md");
+---
+
+<Layout title="Blog">
+  <main>
+    <h1>Blog</h1>
+    <div class="grid">
+      {allPosts.map((post) => <a href={post.url}>{post.frontmatter.title}</a>)}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: grid;
+    place-content: center;
+    height: 100vh;
+  }
+
+  h1 {
+    color: #eee;
+    text-align: center;
+  }
+
+  a {
+    color: #eee;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .grid {
+    display: grid;
+    place-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
+    gap: 5px;
+  }
+
+  a {
+    padding: 0.5rem;
+    background: none;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    text-align: center;
+  }
+</style>
